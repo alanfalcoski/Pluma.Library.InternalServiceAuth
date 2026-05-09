@@ -21,9 +21,10 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # Este projeto não depende de outros pacotes no GitHub Packages; só nuget.org.
       - name: Restore dependencies
-        run: dotnet restore Pluma.Library.InternalServiceAuth.sln
+        run: |
+          dotnet nuget add source --username alanfalcoski --password ${{ secrets.PACKAGES_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/alanfalcoski/index.json"
+          dotnet restore Pluma.Library.InternalServiceAuth.sln
 
       - name: Build project
         run: dotnet build Pluma.Library.InternalServiceAuth.sln --configuration Release --no-restore
@@ -35,7 +36,5 @@ jobs:
       - name: Pack project
         run: dotnet pack Pluma.Library.InternalServiceAuth/Pluma.Library.InternalServiceAuth.csproj --configuration Release --no-build --output ./nupkg /p:PackageVersion=${{ steps.get_version.outputs.VERSION }}
 
-      # GITHUB_TOKEN com packages:write publica no GitHub Packages sem PACKAGES_TOKEN.
-      # Opcional: definir PACKAGES_TOKEN (PAT) no repo e trocar abaixo se quiseres alinhar às outras libs Pluma.
       - name: Push to GitHub Packages
-        run: dotnet nuget push ./nupkg/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+        run: dotnet nuget push ./nupkg/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.PACKAGES_TOKEN }} --skip-duplicate
