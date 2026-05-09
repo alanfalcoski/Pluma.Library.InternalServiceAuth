@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>10.0.0</Version>
+    <PackageId>Pluma.Library.InternalServiceAuth</PackageId>
+    <Authors>Alan Rodrigues</Authors>
+    <Company>IAmAlive</Company>
+    <Description>Middleware ASP.NET Core e handler HttpClient para chamadas internas Fitflow (segredo em header, comparação em tempo constante).</Description>
+    <RepositoryUrl>https://github.com/alanfalcoski/Pluma.Library.InternalServiceAuth</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/alanfalcoski/Pluma.Library.InternalServiceAuth</PackageProjectUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
