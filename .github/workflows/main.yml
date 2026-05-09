@@ -23,6 +23,8 @@ jobs:
 
       - name: Restore dependencies
         run: |
+          # O runner pode já ter uma origem com o nome "github" (ex.: imagem/setup-dotnet).
+          dotnet nuget remove source github 2>/dev/null || true
           dotnet nuget add source --username alanfalcoski --password ${{ secrets.PACKAGES_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/alanfalcoski/index.json"
           dotnet restore Pluma.Library.InternalServiceAuth.sln
 
